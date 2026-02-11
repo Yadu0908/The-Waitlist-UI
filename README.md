@@ -2,7 +2,7 @@
 
 This is a waitlist page built with Next.js (App Router) and Tailwind CSS. The goal was to build a specific UI with strict validation logic without using a backend.
 
-**Live Site:** [PASTE YOUR NETLIFY LINK HERE]
+**Live Site:** [[Link for the live page](https://the-waitlist-ui-vert.vercel.app/)]
 
 ## How I Solved the Requirements
 
