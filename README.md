@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Internal Tools Access - Waitlist UI
 
-## Getting Started
+This is a waitlist page built with Next.js (App Router) and Tailwind CSS. The goal was to build a specific UI with strict validation logic without using a backend.
 
-First, run the development server:
+**Live Site:** [PASTE YOUR NETLIFY LINK HERE]
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## How I Solved the Requirements
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I built this using React state (`useState`) to handle everything on the frontend.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**1. Blocking Gmail and Generic Emails**
+Instead of just checking if the email was valid, I created a list (array) of blocked domains like `gmail.com` and `yahoo.com`.
+When the user types their email, I split the string at the `@` symbol to get the domain part. Then, I check if that domain exists in my blocked list. If it does, I show the "Business emails only" error.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**2. The Reason Field Validation**
+I didn't use the HTML `minlength` attribute. Instead, I tracked the length of the text in the state. If the length is less than 20 characters when the user clicks submit, I show an error message. I also added a small counter in the corner so the user knows how many characters they have typed.
 
-## Learn More
+**3. Success State**
+I used a simple boolean state called `isSuccess`. Initially, it is false. Once all the checks pass (email is business, reason is long enough), I set it to true, which hides the form and shows the "Added to queue" message.
 
-To learn more about Next.js, take a look at the following resources:
+## One Problem I Faced
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I ran into an issue with TypeScript errors when trying to handle the form submission. I kept getting an error saying `Parameter 'e' implicitly has an 'any' type`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+I didn't know how to fix it at first because I am new to TypeScript. I learned that I needed to specifically tell React what kind of event it was. I fixed it by adding `: React.FormEvent` to the submit handler function.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## How to Start the Project
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If you want to run this code on your local machine:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/waitlist-ui.git
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser:**
+   Go to [http://localhost:3000](http://localhost:3000) to see the page.
